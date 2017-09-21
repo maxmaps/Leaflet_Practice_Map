@@ -22,12 +22,12 @@ var OSMMapnikTiles = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}
 // create global variables we can use for layer controls
 var subwayLinesGeoJSON;
 var neighborhoodsGeoJSON;
-var pawnShopsGeoJSON; 
+// var pawnShopsGeoJSON; 
 var wifiHotspotsGeoJSON;
 
 // start the chain reaction by running the addSubwayLines function
+// addSubwayLines();
 addSubwayLines();
-// addWifiHotspots();
 
 // use jQuery get geoJSON to grab geoJson layer, parse it, then plot it on the map
 // because of the asynchronous nature of Javascript, we'll wrap each "getJSON" call in a function, and then call each one in turn. This ensures our layer will work  
@@ -116,7 +116,7 @@ function addWifiHotspots() {
         var wifiHotspotsPointToLayer = function (feature, latlng){
             var wifiHotspotsMarker = L.circle(latlng, 100, {
                 stroke: false,
-                fillColor: '#2ca25f',
+                fillColor: '#cc00ff',
                 fillOpacity: 0.5
             });
             
@@ -138,13 +138,14 @@ function addWifiHotspots() {
         // don't add the pawn shop layer to the map yet
 
         // run our next function to bring in the Pawn Shop data
-        addPawnShops();
+        addNeighborhoodData();
 
 
     });
 
 }
 
+/*
 function addPawnShops() {
     // let's add pawn shops data
     $.getJSON( "geojson/NYC_PawnShop_data.geojson", function( data ) {
@@ -183,6 +184,7 @@ function addPawnShops() {
     });
 
 }
+*/
 
 function addNeighborhoodData() {
 
@@ -197,22 +199,22 @@ function addNeighborhoodData() {
             var value = feature.properties.PovertyPer;
             var fillColor = null;
             if(value >= 0 && value <=0.1){
-                fillColor = "#fee5d9";
+                fillColor = "#ffffd4";
             }
             if(value >0.1 && value <=0.15){
-                fillColor = "#fcbba1";
+                fillColor = "#fee391";
             }
             if(value >0.15 && value<=0.2){
-                fillColor = "#fc9272";
+                fillColor = "#fec44f";
             }
             if(value > 0.2 && value <=0.3){
-                fillColor = "#fb6a4a";
+                fillColor = "#fe9929";
             }
             if(value > 0.3 && value <=0.4) { 
-                fillColor = "#de2d26";
+                fillColor = "#d95f0e";
             }
             if(value > 0.4) { 
-                fillColor = "#a50f15";
+                fillColor = "#993404";
             }
      
 
@@ -249,7 +251,7 @@ function addNeighborhoodData() {
         subwayLinesGeoJSON.addTo(map);
 
         // finally, the Pawn Shop dots
-        pawnShopsGeoJSON.addTo(map);
+        // pawnShopsGeoJSON.addTo(map);
 
         // oh, and that wifi hotspots code you're trying to get working
 
@@ -272,7 +274,7 @@ function createLayerControls(){
     };
 
     var overlayMaps = {
-        "Pawn Shops": pawnShopsGeoJSON,
+       // "Pawn Shops": pawnShopsGeoJSON,
         "Subway Lines": subwayLinesGeoJSON,
         "Povery Map": neighborhoodsGeoJSON,
         "Wifi Hotspots": wifiHotspotsGeoJson
