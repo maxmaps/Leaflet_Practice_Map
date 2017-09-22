@@ -277,7 +277,7 @@ function createLayerControls(){
        // "Pawn Shops": pawnShopsGeoJSON,
         "Subway Lines": subwayLinesGeoJSON,
         "Povery Map": neighborhoodsGeoJSON,
-        "Wifi Hotspots": wifiHotspotsGeoJson
+        "Wifi Hotspots": wifiHotspotsGeoJSON
     };
 
     // add control
